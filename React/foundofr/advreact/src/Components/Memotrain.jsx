@@ -5,7 +5,6 @@ function Memotrain() {
   const [fact,setfact]= new useState(Number(0)); 
   const [ans,setans] = new useState(Number(0));
   const factca = useMemo(()=>{
-    console.log("hey");
     let k =1;
     for(let i=1;i<fact;i++){
         k=k*i;
