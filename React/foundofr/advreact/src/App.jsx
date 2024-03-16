@@ -2,6 +2,7 @@ import { memo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import Atomfamily from './Components/Atomfamily'
 import Effecttrain from './Components/Effecttrain'
 import Memotrain from './Components/Memotrain'
 import Usereftrain from './Components/Usereftrain'
@@ -9,7 +10,6 @@ import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Contexttry from './Components/Contexttry'
 import Recoiltry from './Components/Recoiltry'
 import { RecoilRoot } from 'recoil'
-
 const MainPage=()=>{
   return(
     <h1>Main page bro</h1>
@@ -40,10 +40,11 @@ function App() {
       <Memotrain/>
       <Usereftrain/> */}
       {/* <Contexttry/> */}
-      <RecoilRoot>
+      {/* <RecoilRoot>
 
       <Recoiltry/>
-      </RecoilRoot>
+      </RecoilRoot> */}
+      <Atomfamily />
 
     </>
   )

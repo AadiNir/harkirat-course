@@ -1,22 +1,19 @@
 import React from 'react'
 import { RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
-import { defsec, job, messagings, mynetwork, notifcation } from './linkedstate'
+import { defsec, getnotification } from './linkedstate'
 
 function Recoiltry() {
-    const net=useRecoilValue(defsec)
-    const setnet=useSetRecoilState(mynetwork)
-    const jo=useRecoilValue(job)
-    const mes=useRecoilValue(messagings)
-    const not=useRecoilValue(notifcation)
+   const notobj = useRecoilValue(getnotification);
     
   return (
 
     <div>
-        <button>My network ({net})</button>
-        <button>Jobs ({jo})</button>
-        <button>Messaging ({mes})</button>
-        <button>Notifcation ({not})</button>
-        <button onClick={()=>setnet(net+1)}>press me</button>
+        <button>My network ({notobj.network})</button>
+        <button>Jobs ({notobj.jobs})</button>
+        <button>Messaging ({notobj.messaging})</button>
+        <button>Notifcation ({notobj.notifications})</button>
+        <button onClick={()=>setnet(notobj.network+1)}>press me</button>
+
     </div>
 
   )
