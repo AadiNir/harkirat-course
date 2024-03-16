@@ -1,6 +1,6 @@
 import React from 'react'
 import { RecoilRoot, useRecoilState, useRecoilValue } from 'recoil'
-import { countatom } from '../store/atoms/count'
+import { countatom,evenselector } from '../store/atoms/count'
 
 function Contexttry() {
   return (
@@ -8,6 +8,7 @@ function Contexttry() {
     <RecoilRoot>
         <Countredner/>
         <Buttons />
+        <Itiseven/>
     </RecoilRoot>
     </div>
   )
@@ -18,6 +19,16 @@ function Countredner(){
     return(
         <div>
             {count}
+        </div>
+    )
+}
+function Itiseven(){
+    const iseven = useRecoilValue(evenselector);
+
+    return(
+
+        <div>
+            {(iseven)?<h1>it's even</h1>:<h1>it's odd</h1>}
         </div>
     )
 }

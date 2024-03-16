@@ -7,6 +7,8 @@ import Memotrain from './Components/Memotrain'
 import Usereftrain from './Components/Usereftrain'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
 import Contexttry from './Components/Contexttry'
+import Recoiltry from './Components/Recoiltry'
+import { RecoilRoot } from 'recoil'
 
 const MainPage=()=>{
   return(
@@ -37,7 +39,12 @@ function App() {
       <Effecttrain/>
       <Memotrain/>
       <Usereftrain/> */}
-      <Contexttry/>
+      {/* <Contexttry/> */}
+      <RecoilRoot>
+
+      <Recoiltry/>
+      </RecoilRoot>
+
     </>
   )
 }
