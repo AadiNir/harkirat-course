@@ -6,6 +6,7 @@ import Effecttrain from './Components/Effecttrain'
 import Memotrain from './Components/Memotrain'
 import Usereftrain from './Components/Usereftrain'
 import {BrowserRouter,Route,Routes} from 'react-router-dom'
+import Contexttry from './Components/Contexttry'
 
 const MainPage=()=>{
   return(
@@ -25,7 +26,7 @@ function App() {
   }
   return (
     <>
-      <BrowserRouter>
+      {/* <BrowserRouter>
         <Routes>
 
           <Route path='/' element={<MainPage/>}/>
@@ -33,9 +34,10 @@ function App() {
         </Routes>
       </BrowserRouter>
       <button onClick={handlepage}>Click for route</button>
-      {/* <Effecttrain/> */}
+      <Effecttrain/>
       <Memotrain/>
-      {/* <Usereftrain/> */}
+      <Usereftrain/> */}
+      <Contexttry/>
     </>
   )
 }
