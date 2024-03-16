@@ -2,7 +2,7 @@ import { atom, selector } from "recoil";
 
 export const mynetwork = atom({
     key:"mynetwork",
-    default:102
+    default:90
 })
 
 export const job = atom({
@@ -21,8 +21,8 @@ export const defsec = selector({
     key:"defsec",
     get : ({get})=>{
         const net = get(mynetwork);
-        if(net>100){
-            return "99+"
+        if(net>=100){
+            return 99;
         }
         return net;
     }
