@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../db');
 const z = require('zod');
 const {JWT_SECRET} = require("../config");
+const { authMiddleware } = require('../middleware');
 const user =  z.object(
     {
         username: z.string(),
@@ -41,11 +42,34 @@ router.post('/Signup',async(req,res)=>{
         message:"user created successfully",
         tokens:  token
     })
+})
+router.get("/bulk", async (req, res) => {
+    const filter = req.query.filter || "";
 
+    const users = await User.find({
+        $or: [{
+            firstName: {
+                "$regex": filter
+            }
+        }, {
+            lastName: {
+                "$regex": filter
+            }
+        }]
+    })
 
-    
-
-
+    res.json({
+        user: users.map(user => ({
+            username: user.username,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            _id: user._id
+        }))
+    })
+})
+router.post('/Update',authMiddleware,async (req,res)=>{
+    const data = req.body;
+    await User.updateOne({id:data.userid},data);
 
 })
 module.exports = router;
