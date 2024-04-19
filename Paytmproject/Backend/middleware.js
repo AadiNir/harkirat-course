@@ -9,6 +9,7 @@ function authMiddleware(req,res,next){
     try{
         const decoded = jwt.verify(ggtoken,JWT_SECRET);
         req.userId = decoded.usrid;
+        next();
     }catch(err){
     return res.status(403);
     }
