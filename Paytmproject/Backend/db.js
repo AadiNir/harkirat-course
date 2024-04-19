@@ -8,6 +8,13 @@ const User = new mongoose.model('User-schema',new Schema(
         lastname:String
     }
 ));
+const Accounts = new mongoose.model('Accounts-schema',new Schema(
+    {
+        userId: mongoose.Schema.Types.ObjectId,
+        balance: Number
+    }
+))
 module.exports = {
-    User
+    User,
+    Accounts
 }

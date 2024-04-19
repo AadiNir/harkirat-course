@@ -3,6 +3,7 @@ const router = express.Router();
 const z = require('zod');
 const User = require('../db');
 const JWT_SECRET = require('../config');
+const authMiddleware = require('../')
 const userSchema =z.object( {
     username:z.string().email(),
     firstname:z.string(),
@@ -65,5 +66,31 @@ router.post('signin',async (req,res)=>{
      res.json({
         message:"Sign in unsuccessfully"
      })
+})
+router.put("/",authMiddleware,async (req,res)=>{
+    actualid = req.userid;
+    
+    const datafromuser = req.body;
+    await User.updateOne({
+        _id:actualid
+    },datafromuser);
+    res.json("Successfully updated ");
+
+})
+
+router.get('/bulk',async(req,res)=>{
+    const anyname = req.query.filter;
+    const usr = await User.find({
+        $or:[
+            {firstname:{"$regex": anyname}},
+            {lastname: {"$regex":anyname}}
+        ]
+    })
+    res.json(usr.map(users =>({
+        username: users.username,
+        firstname:users.firstname,
+        lastname: users.lastname,
+        _id:users._id
+    })))
 })
 module.exports = router;
