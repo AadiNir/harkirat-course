@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 mongoose.connect("mongodb+srv://aadinir:Aamod123@cluster0.sszhzlo.mongodb.net/")
-const User = new mongoose.model('User-schema',new Schema(
+const User = new mongoose.model('User-schema',new mongoose.Schema(
     {
         username:String,
         password:String,
@@ -8,7 +8,7 @@ const User = new mongoose.model('User-schema',new Schema(
         lastname:String
     }
 ));
-const Accounts = new mongoose.model('Accounts-schema',new Schema(
+const Accounts = new mongoose.model('Accounts-schema',new mongoose.Schema(
     {
         userId: mongoose.Schema.Types.ObjectId,
         balance: Number

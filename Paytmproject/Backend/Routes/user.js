@@ -3,7 +3,7 @@ const router = express.Router();
 const z = require('zod');
 const User = require('../db');
 const JWT_SECRET = require('../config');
-const authMiddleware = require('../')
+const authMiddleware = require('../middleware')
 const userSchema =z.object( {
     username:z.string().email(),
     firstname:z.string(),
@@ -72,15 +72,16 @@ router.post('signin',async (req,res)=>{
         message:"Sign in unsuccessfully"
      })
 })
-router.put("/",authMiddleware,async (req,res)=>{
+
+router.put('/new',authMiddleware,async(req,res)=>{
     actualid = req.userid;
-    
     const datafromuser = req.body;
     await User.updateOne({
         _id:actualid
-    },datafromuser);
-    res.json("Successfully updated ");
-
+    },datafromuser)
+    res.json({
+        message:"Successfully updated"
+    })
 })
 
 router.get('/bulk',async(req,res)=>{
