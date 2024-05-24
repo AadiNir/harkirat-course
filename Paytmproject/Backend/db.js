@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://aadinir:Aamod123@cluster0.sszhzlo.mongodb.net/")
-const User = new mongoose.model('User-schema',new mongoose.Schema(
+try{
+mongoose.connect("mongodb+srv://aadinir:Aamod123@cluster0.sszhzlo.mongodb.net/");
+console.log("connection sucessfull")
+}catch(err){
+    console.log("connection unsuccessfull");
+}
+const User =  mongoose.model('User-schema',new mongoose.Schema(
     {
         username:String,
         password:String,
@@ -8,7 +13,7 @@ const User = new mongoose.model('User-schema',new mongoose.Schema(
         lastname:String
     }
 ));
-const Accounts = new mongoose.model('Accounts-schema',new mongoose.Schema(
+const Accounts = mongoose.model('Accounts-schema',new mongoose.Schema(
     {
         userId: mongoose.Schema.Types.ObjectId,
         balance: Number

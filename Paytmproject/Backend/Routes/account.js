@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const authMiddleware = require('../middleware')
-const Accounts = require('../db');
+const {Accounts} = require('../db');
 const { default: mongoose } = require("mongoose");
 
 router.get('/balance',authMiddleware,async (req,res)=>{

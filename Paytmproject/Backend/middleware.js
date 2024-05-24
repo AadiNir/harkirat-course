@@ -6,14 +6,15 @@ const router = express.Router();
 function authMiddleware(req, res, next) {
     const gottoken = req.headers.authorization;
     if (!gottoken || !gottoken.startsWith("Bearer ")) {
-        return res.status(403).json({});
+        return res.status(403).json({"hola":"error"});
     }
     const ggtoken = gottoken.split(" ")[1];
+
     try {
         const decoded = jwt.verify(ggtoken, JWT_SECRET);
         req.userId = decoded.usrid;
     } catch (err) {
-        return res.status(403).json({});
+        return res.status(403).json({"new error":"yes it is"});
     }
     next();
 }

@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const z = require('zod');
-const User = require('../db');
-const JWT_SECRET = require('../config');
+const {User} = require('../db');
+const {JWT_SECRET} = require('../config');
 const authMiddleware = require('../middleware')
+const jwt = require('jsonwebtoken')
 const userSchema =z.object( {
     username:z.string().email(),
     firstname:z.string(),
@@ -22,23 +23,26 @@ router.post('/signup',async (req,res)=>{
         }
         )
     }
-    const userexsist = await User.findOne({username:data.username});
+    const userexsist = await User.findOne(
+        {username:data.username}
+    );
     if(userexsist){
-        res.status(411).json({
-            message:"Email already taken/Incorrect inputs"
+        return res.status(411).json({
+            message:"Email already taken/Incorrect inputs 2"
         })
     }
     const usr = await User.create({
         username:data.username,
         password:data.firstname,
         firstname:data.lastname,
-        lastname: data.lastnae
+        lastname: data.lastname
     })
+    console.log("user been created")
     await User.create({
         userId:usr._id,
         balance:Math.floor(Math.random()*10000)+1
     })
-    const token = jwt.sign(usr._id,JWT_SECRET);
+    const token = jwt.sign({userid: usr._id},JWT_SECRET);
 
     res.json({
         message:"user created successfully",
@@ -49,7 +53,7 @@ const usrcheck = z.object({
     username:z.string(),
     password:z.string()
 })
-router.post('signin',async (req,res)=>{
+router.post('/signin',async (req,res)=>{
      const data = req.body;
      try{
         usrcheck.parse(data);
@@ -58,7 +62,7 @@ router.post('signin',async (req,res)=>{
             message:"Sign in unsuccessfull"
         })
      }
-     const usr = await User.findone({
+     const usr = await User.findOne({
         username:data.username,
         password:data.password
     });
