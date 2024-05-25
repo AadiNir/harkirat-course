@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import Signin from './Pages/Signin'
 import Singnup from './Pages/Singnup'
@@ -16,8 +15,8 @@ function App() {
       <Routes>
         <Route path="/signin" element = {<Signin/>}/>
         <Route path="/signup" element = {<Singnup/>}/>
-        <Route path="/dashboard" element = {<Sendmoney/>}/>
-        <Route path="/send" element = {<Dashboard/>}/>
+        <Route path="/dashboard" element = {<Dashboard/>}/>
+        <Route path="/send" element = {<Sendmoney/>}/>
       </Routes>
     </BrowserRouter>
      
