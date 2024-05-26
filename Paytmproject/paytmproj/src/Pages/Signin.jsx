@@ -2,6 +2,7 @@ import React from 'react'
 import Heading from '../Components/Heading'
 import Inputbox from '../Components/Inputbox'
 import Button from '../Components/Button'
+import axios from 'axios'
 import { useState } from 'react'
 function Signin() {
   const [username,setusername]= useState('');
@@ -16,11 +17,12 @@ function Signin() {
         
         <Inputbox placehold={"Username"}  onChange={(e)=>setusername(e.target.value)}/>
         <Inputbox placehold={"Password"} onChange={(e)=>setpassword(e.target.value)} />
-        <Button onClick={(e)=>{
-          axios.post("localhost:3000/api/v1/user/signup",{
-            username,
-            password
+        <Button onClick={async(e)=>{
+          const response = await axios.post("http://localhost:3000/api/v1/user/signin",{
+            username:username,
+            password:password
           })
+          localStorage.setItem("token",response.data.Token);
         }} label={"Sign in"}/>
         </div>
     </div>
