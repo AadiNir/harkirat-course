@@ -16,7 +16,12 @@ function Signin() {
         
         <Inputbox placehold={"Username"}  onChange={(e)=>setusername(e.target.value)}/>
         <Inputbox placehold={"Password"} onChange={(e)=>setpassword(e.target.value)} />
-        <Button label={"Sign in"}/>
+        <Button onClick={(e)=>{
+          axios.post("localhost:3000/api/v1/user/signup",{
+            username,
+            password
+          })
+        }} label={"Sign in"}/>
         </div>
     </div>
     </div>
