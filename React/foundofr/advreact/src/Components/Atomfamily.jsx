@@ -19,17 +19,14 @@ const dyatomicfamily = atomFamily({
 function Atomfamily() {
   return (
     <div>
-    <h1>hi hello </h1>
     <RecoilRoot>
         <Todocomponent id={1}/>
     </RecoilRoot>
-
     </div>
   )
 }
 function Todocomponent({id}){
-    const k = useRecoilValue(dyatomicfamily(id));
-
+   const k = useRecoilValue(dyatomicfamily(id));
     return(
         <div>
         <h1>{k.id}</h1>
