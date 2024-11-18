@@ -1,4 +1,4 @@
-import { memo, useState } from 'react'
+import { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -20,12 +20,24 @@ const HandlePage=()=>{
     <h1>Handle Page bro</h1>
   )
 }
+let renrender = 0;
 
 function App() {
-  const [count, setCount] = useState(0)
-  const handlepage=()=>{
-    window.location.href='handle'
-  }
+  const [count,setcount]=useState(0);
+  const incremenet = useCallback(function(){
+    setcount(count+1);
+  },[])
+  const decrement = useCallback(function(){
+    setcount(count-1);
+  })
+  const clickfunc = useCallback(function(val){
+    alert(val);
+  },[])
+  const [val, setVal] = useState(""); // State for input value
+  const handleChange = (e) => {
+    setVal(e.target.value); // Update state on input change
+  };
+  renrender+=1;
   return (
     <>
       {/* <BrowserRouter>
@@ -44,10 +56,37 @@ function App() {
 
       <Recoiltry/>
       </RecoilRoot> */}
-      <Atomfamily />
-
+        <div>The factorial is </div>
+        <div>The component has rerendered {renrender}</div>
+        <div>
+      <input
+        type="text"
+        onChange={handleChange} // Separate input handling
+        value={val} // Controlled input
+      />
+    </div>
     </>
   )
 }
+const Inputfield = memo(({ clickfunc }) => {
+  console.log("Inputfield rendered");
+
+  const [val, setVal] = useState(""); // State for input value
+
+  const handleChange = (e) => {
+    setVal(e.target.value); // Update state on input change
+  };
+
+  return (
+    <div>
+      <input
+        type="text"
+        onChange={handleChange} // Separate input handling
+        value={val} // Controlled input
+      />
+      <button onClick={() => clickfunc(val)}>Click Me</button>
+    </div>
+  );
+});
 
 export default App
