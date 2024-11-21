@@ -6,7 +6,7 @@ interface user{
 export default async function Home() {
   const getdata = async ()=>{
    let val =  await axios.get("http://localhost:3000/api");
-    return await val.data
+    return val.data
   };
   const val= await getdata();
   if(!val){
@@ -18,8 +18,12 @@ export default async function Home() {
   }
   return (
     <div>
-      {val.name}
-      {val.email}
+      <div className="space-x-5 flex items-center justify-center flex-col min-h-screen ">
+        <input type="text" placeholder="please enter your email"/>
+        <input type="text" placeholder="please enter your password"/>
+        <button>Click me</button>
+
+      </div>
 
     </div>
   );
